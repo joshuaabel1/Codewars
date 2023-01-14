@@ -3,7 +3,8 @@ import re
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from git import Repo
-
+from dotenv import load_dotenv
+load_dotenv()
 driver = webdriver.Chrome()
 
 driver.get("https://www.codewars.com/users/sign_in")
@@ -12,11 +13,11 @@ driver.implicitly_wait(10)
 
 username_field = driver.find_element(By.ID, "user_email")
 
-username_field.send_keys("joshu1195@outlook.com")
+username_field.send_keys(os.getenv("USER_EMAIL"))
 
 password_field = driver.find_element(By.ID, "user_password")
 
-password_field.send_keys("21wq43reas")
+password_field.send_keys(os.getenv("PASS"))
 
 login_button = driver.find_element(By.XPATH, 
 "//button[@class='btn mt-3 w-full text-center inline-flex items-center justify-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md shadow-sm text-white dark:text-gray-200 is-red focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-cgray-600']")
@@ -24,7 +25,7 @@ login_button = driver.find_element(By.XPATH,
 login_button.click()
 
 driver.implicitly_wait(10)
-driver.get("https://www.codewars.com/users/joshua_abel27/completed_solutions")
+driver.get(os.getenv("URL"))
 
 # "//div[@class='items-list w-full md:w-2/3 md:pl-4 md:border-l md:grow']"
 level = driver.find_element(By.XPATH, "//div[@class='small-hex is-extra-wide is-inline mr-15px is-white-rank']")
