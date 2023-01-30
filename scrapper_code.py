@@ -8,13 +8,10 @@ import time
 from selenium.webdriver import Firefox, FirefoxOptions
 from selenium.webdriver.firefox.service import Service as FirefoxService
 
-service = FirefoxService(executable_path=os.path.abspath("geckodriver"))
-options = FirefoxOptions()
-
-driver = Firefox(service=service, options=options)
+path_driver = os.path.abspath("geckodriver")
 load_dotenv()
 
-# driver = webdriver.Firefox(executable_path='/path/to/geckodriver')
+driver = webdriver.Firefox(executable_path=path_driver)
 
 driver.get("https://www.codewars.com/users/sign_in")
 
