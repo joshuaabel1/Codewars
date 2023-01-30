@@ -26,9 +26,3 @@ jobs:
     - name: Run the script
       run: |
         python scrapper_code.py
-
-    - name: Commit and push changes
-      uses: endormi/action-auto-commit-push@v0
-      with:
-        commit_message: Automated update
-        push_branch: main
