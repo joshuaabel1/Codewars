@@ -5,17 +5,11 @@ from selenium.webdriver.common.by import By
 from git import Repo
 from dotenv import load_dotenv
 import time
-from selenium.webdriver import Firefox, FirefoxOptions
-from selenium.webdriver.firefox.service import Service as FirefoxService
-
-service = FirefoxService(executable_path=os.path.abspath("geckodriver"))
-options = FirefoxOptions()
-
-driver = Firefox(service=service, options=options)
-
-# driver = Firefox(service=service, options=options)
+from selenium.webdriver import Firefox
 
 load_dotenv()
+
+driver = Firefox()
 
 driver.get("https://www.codewars.com/users/sign_in")
 
