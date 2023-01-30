@@ -70,9 +70,9 @@ def build_functions(func_list):
         with open(file_name, "w") as f:
             f.write(func_code.replace("last month", ""))
         functions[func_name] = file_name
-        if os.path.exists(os.path.join(folder_name, "count.py")):
-            repo.git.add(os.path.join(folder_name, "count.py"))
-            repo.index.commit("Update count.py")
+        if os.path.exists(os.path.join(folder_name, file_name)):
+            repo.git.add(os.path.join(folder_name, file_name))
+            repo.index.commit("Update file_name")
         else:
             repo.git.add(A=True)
             repo.index.commit(f"Add kyu_{kyu} files")
