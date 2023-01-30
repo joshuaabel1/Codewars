@@ -12,9 +12,13 @@ load_dotenv()
 
 path_driver = os.path.abspath("geckodriver")
 
-service = FirefoxService(executable_path=path_driver)
+service_log_path = os.path.abspath("geckodriver.log")
 
-driver = webdriver.Firefox(service=service)
+service = FirefoxService(executable_path=path_driver, log_path=service_log_path)
+
+service.start()
+
+driver = webdriver.Firefox(service.service_url)
 
 driver.get("https://www.codewars.com/users/sign_in")
 
