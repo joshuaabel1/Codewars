@@ -8,7 +8,7 @@ import time
 from selenium.webdriver import Firefox, FirefoxOptions
 from selenium.webdriver.firefox.service import Service as FirefoxService
 
-service = FirefoxService(executable_path='/path/to/geckodriver')
+service = FirefoxService(executable_path=os.path.abspath("geckodriver")
 options = FirefoxOptions()
 
 driver = Firefox(service=service, options=options)
