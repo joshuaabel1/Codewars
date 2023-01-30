@@ -8,7 +8,7 @@ import time
 
 load_dotenv()
 
-driver = webdriver.Chrome()
+driver = webdriver.Firefox()
 
 driver.get("https://www.codewars.com/users/sign_in")
 
