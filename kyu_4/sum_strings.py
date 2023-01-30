@@ -35,4 +35,3 @@ def sum_strings(str1, str2):
         return '0'
     
     return str
-
