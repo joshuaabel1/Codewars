@@ -8,7 +8,7 @@ import time
 
 load_dotenv()
 
-driver = webdriver.Firefox()
+driver = webdriver.Firefox(executable_path='/path/to/geckodriver')
 
 driver.get("https://www.codewars.com/users/sign_in")
 
