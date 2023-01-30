@@ -12,7 +12,6 @@ service = FirefoxService(executable_path=os.path.abspath("geckodriver"))
 options = FirefoxOptions()
 
 driver = Firefox(service=service, options=options)
-
 load_dotenv()
 
 # driver = webdriver.Firefox(executable_path='/path/to/geckodriver')
