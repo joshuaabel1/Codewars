@@ -57,7 +57,7 @@ functions = re.findall(r"(\d+) kyu.*?Python:(.*?)(?=\n\d|\Z)", code, re.DOTALL)
 
 def build_functions(func_list):
     functions = {}
-    repo_dir = './'
+    repo_dir = '.'
     repo = Repo.init(repo_dir)
     for func in func_list:
         kyu = func[0]
@@ -73,7 +73,7 @@ def build_functions(func_list):
         functions[func_name] = file_name
         if os.path.exists(os.path.join(folder_name, file_name)):
             repo.git.add(os.path.join(folder_name, file_name))
-            repo.index.commit("Update file_name")
+            repo.index.commit(f"Update {file_name}")
         else:
             repo.git.add(A=True)
             repo.index.commit(f"Add kyu_{kyu} files")
