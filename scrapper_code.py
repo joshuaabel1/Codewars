@@ -57,7 +57,7 @@ functions = re.findall(r"(\d+) kyu.*?Python:(.*?)(?=\n\d|\Z)", code, re.DOTALL)
 
 def build_functions(func_list):
     functions = {}
-    repo_dir = "D:\job\Codewwars\codewars"
+    repo_dir = './'
     repo = Repo.init(repo_dir)
     for func in func_list:
         kyu = func[0]
