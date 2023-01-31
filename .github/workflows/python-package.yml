@@ -27,6 +27,11 @@ jobs:
       run: |
         pip install -r requirements.txt
 
+    - name: Install Google Chrome
+      run: |
+        wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+        sudo apt install ./google-chrome-stable_current_amd64.deb
+
     - name: Run scrapper_code
       run: |
         python scrapper_code.py
