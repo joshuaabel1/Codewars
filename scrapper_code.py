@@ -6,10 +6,16 @@ from git import Repo
 from dotenv import load_dotenv
 import time
 from selenium.webdriver import Firefox, Chrome
+from selenium.webdriver.chrome.options import Options
+
+chrome_options = Options()
+chrome_options.add_argument("--headless")
+
+driver = webdriver.Chrome(options=chrome_options)
 
 load_dotenv()
 
-driver = webdriver.Chrome(executable_path='/path/to/chromedriver', desired_capabilities=chrome_options.to_capabilities())
+# driver = webdriver.Chrome(executable_path='/path/to/chromedriver', desired_capabilities=chrome_options.to_capabilities())
 
 driver.get("https://www.codewars.com/users/sign_in")
 
