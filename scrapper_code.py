@@ -48,9 +48,9 @@ while True:
         break
     last_height = new_height
 
-level = driver.find_element(
-    By.XPATH, "//div[@class='small-hex is-extra-wide is-inline mr-15px is-white-rank']")
-folder_kata = level.text
+# level = driver.find_element(
+#     By.XPATH, "//div[@class='small-hex is-extra-wide is-inline mr-15px is-white-rank']")
+# folder_kata = level.text
 
 code_element = driver.find_element(
     By.XPATH, "//div[@class='items-list w-full md:w-2/3 md:pl-4 md:border-l md:grow']")
