@@ -1,11 +1,6 @@
 
-def number(lines):
-    #your code here
-    count = 1
-    result = []
-    for i in lines:
-        line = f"{count}: {i}"
-        result.append(line)
-        count += 1
-        
-    return result
+def number(bus_stops):
+    start = 0
+    for i in bus_stops:
+        start += i[0] - i[1]
+    return start
