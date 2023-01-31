@@ -9,7 +9,7 @@ from selenium.webdriver import Firefox, Chrome
 
 load_dotenv()
 
-driver = Chrome()
+driver = webdriver.Chrome(executable_path='/usr/bin/chromedriver')
 
 driver.get("https://www.codewars.com/users/sign_in")
 
