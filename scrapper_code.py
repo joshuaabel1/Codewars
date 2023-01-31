@@ -35,7 +35,7 @@ login_button = driver.find_element(By.XPATH,
 login_button.click()
 
 driver.implicitly_wait(10)
-driver.get(os.getenv("URL"))
+driver.("https://www.codewars.com/users/joshua_abel27/completed_solutions")
 last_height = driver.execute_script(
     "return Math.max( document.body.scrollHeight, document.body.offsetHeight, document.documentElement.clientHeight, document.documentElement.scrollHeight, document.documentElement.offsetHeight );")
 
