@@ -1,7 +1,4 @@
 
-def greet(name, owner):
-    # Add code here
-    if name == owner:
-        return f"Hello boss"
-    return "Hello guest"
-    
+def greet(name):
+    #Good Luck (like you need it)
+    return f"Hello, {name} how are you doing today?"
