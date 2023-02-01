@@ -86,13 +86,15 @@ def build_functions(func_list):
         else:
             repo.git.add(A=True)
             repo.index.commit(f"Add kyu_{kyu} files")
+        repo.create_submodule(f"kyu_{kyu}", f"https://github.com/joshuaabel1/Codewars/tree/main/kyu_{kyu}")
+
     # Remove remote "origin" if it exists
     try:
         repo.remote("origin").remove(repo, "origin")
     except git.exc.GitCommandError as e:
         # Do nothing if remote "origin" doesn't exist
         pass
-    repo.create_submodule(f"kyu_{kyu}", f"https://github.com/joshuaabel1/Codewars/tree/main/kyu_{kyu}")
+
     # Create new remote "origin"
     origin = repo.create_remote(name='origin', url='https://github.com/joshuaabel1/Codewars.git')
     try:
@@ -104,6 +106,7 @@ def build_functions(func_list):
     repo.git.submodule("update")
 
     return functions
+
 
 
 build_functions(functions)
