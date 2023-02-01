@@ -8,6 +8,7 @@ import time
 from selenium.webdriver import Firefox, Chrome
 from selenium.webdriver.chrome.options import Options
 from git import RemoteProgress
+import git
 
 load_dotenv()
 chrome_options = Options()
