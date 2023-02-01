@@ -67,8 +67,6 @@ def build_functions(func_list):
     functions = {}
     repo_dir = '.'
     repo = Repo.init(repo_dir)
-    repo.git.submodule('init')
-    repo.git.submodule('update')
     for func in func_list:
         kyu = func[0]
         func_code = func[1].replace(
