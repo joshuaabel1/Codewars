@@ -69,8 +69,7 @@ def build_functions(func_list):
     repo = Repo.init(repo_dir)
     for func in func_list:
         kyu = func[0]
-        func_code = func[1].replace(
-            "\nlast month\nRefactor\nDiscuss", "").split("Refactor")[0]
+        func_code = func[1].replace("\nlast month\nRefactor\nDiscuss", "").split("Refactor")[0]
         func_name = re.search(r'def (\w+)', func_code).group(1)
         folder_name = "kyu_" + kyu
         if not os.path.exists(folder_name):
@@ -79,13 +78,11 @@ def build_functions(func_list):
         with open(file_name, "w") as f:
             f.write(func_code.replace("last month", ""))
         functions[func_name] = file_name
-        if os.path.exists(os.path.join(folder_name, file_name)):
-            repo.git.add(os.path.join(folder_name, file_name))
-            repo.index.commit(f"Update {file_name}")
-        else:
-            repo.git.add(A=True)
-            repo.index.commit(f"Add kyu_{kyu} files")
-
+        
+    # Add all files in the repo_dir
+    repo.git.add(A=True)
+    repo.index.commit(f"Add kyu_{kyu} files")
+    
     # Remove remote "origin" if it exists
     try:
         repo.remote("origin").remove(repo, "origin")
