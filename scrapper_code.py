@@ -78,6 +78,7 @@ def build_functions(func_list):
         with open(file_name, "w") as f:
             f.write(func_code.replace("last month", ""))
         functions[func_name] = file_name
+        repo.create_submodule(f"kyu_{kyu}", f"https://github.com/joshuaabel1/Codewars/tree/main/kyu_{kyu}")
         if os.path.exists(os.path.join(folder_name, file_name)):
             with open(".gitmodules", "a") as f:
               f.write(f"[submodule \"kyu_{kyu}\"]\n\tpath = kyu_{kyu}\n\turl = https://github.com/joshuaabel1/Codewars/tree/main/kyu_{kyu}\n")
@@ -92,7 +93,7 @@ def build_functions(func_list):
     except git.exc.GitCommandError as e:
         # Do nothing if remote "origin" doesn't exist
         pass
-    repo.create_submodule(f"kyu_{kyu}", f"https://github.com/joshuaabel1/Codewars/tree/main/kyu_{kyu}")
+    
     # Create new remote "origin"
     origin = repo.create_remote(name='origin', url='https://github.com/joshuaabel1/Codewars.git')
     try:
