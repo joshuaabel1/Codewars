@@ -96,6 +96,8 @@ def build_functions(func_list):
         origin.push(refspec="main")
     except git.exc.GitCommandError as e:
         print(e)
+    repo.git.submodule("init")
+    repo.git.submodule("update")
 
     return functions
 
