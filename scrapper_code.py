@@ -67,6 +67,8 @@ def build_functions(func_list):
     functions = {}
     repo_dir = '.'
     repo = Repo.init(repo_dir)
+    repo.git.submodule('init')
+    repo.git.submodule('update')
     for func in func_list:
         kyu = func[0]
         func_code = func[1].replace(
@@ -79,14 +81,27 @@ def build_functions(func_list):
         with open(file_name, "w") as f:
             f.write(func_code.replace("last month", ""))
         functions[func_name] = file_name
-        repo.git.add(A=True)
-        repo.index.commit(f"Add kyu_{kyu} files")
-    repo.remote("origin").remove(repo, "origin")
+        if os.path.exists(os.path.join(folder_name, file_name)):
+            repo.git.add(os.path.join(folder_name, file_name))
+            repo.index.commit(f"Update {file_name}")
+        else:
+            repo.git.add(A=True)
+            repo.index.commit(f"Add kyu_{kyu} files")
+
+    # Remove remote "origin" if it exists
+    try:
+        repo.remote("origin").remove(repo, "origin")
+    except git.exc.GitCommandError as e:
+        # Do nothing if remote "origin" doesn't exist
+        pass
+
+    # Create new remote "origin"
     origin = repo.create_remote(name='origin', url='https://github.com/joshuaabel1/Codewars.git')
     try:
         origin.push(refspec="main")
     except git.exc.GitCommandError as e:
         print(e)
+
     return functions
 
 
