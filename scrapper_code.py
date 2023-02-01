@@ -7,13 +7,15 @@ from dotenv import load_dotenv
 import time
 from selenium.webdriver import Firefox, Chrome
 from selenium.webdriver.chrome.options import Options
+from git import RemoteProgress
 
+load_dotenv()
 chrome_options = Options()
 chrome_options.add_argument("--headless")
 
 driver = webdriver.Chrome(options=chrome_options)
 
-load_dotenv()
+
 
 # driver = webdriver.Chrome(executable_path='/path/to/chromedriver', desired_capabilities=chrome_options.to_capabilities())
 
@@ -85,7 +87,8 @@ def build_functions(func_list):
             repo.index.commit(f"Add kyu_{kyu} files")
     repo.remote("origin").remove(repo, "origin")
     origin = repo.create_remote(name='origin', url='https://github.com/joshuaabel1/Codewars.git')
-    origin.push("--set-upstream", "origin", "main")
+    progress = RemoteProgress()
+    origin.push("--set-upstream", "origin", "main", progress=progress)
     return functions
 
 
