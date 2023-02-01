@@ -70,6 +70,7 @@ def build_functions(func_list):
     kyu_out = ""
     for func in func_list:
         kyu = func[0]
+        kyu_out = func[0]
         func_code = func[1].replace("\nlast month\nRefactor\nDiscuss", "").split("Refactor")[0]
         func_name = re.search(r'def (\w+)', func_code).group(1)
         folder_name = "kyu_" + kyu
@@ -92,7 +93,6 @@ def build_functions(func_list):
                 raise ValueError("A URL was not given and a repository did not exist at %s" % submodule_url)
             repo.create_submodule(f"kyu_{kyu}", submodule_url)
             
-        kyu_out = func[0]
     # Remove remote "origin" if it exists
     repo.git.add(A=True)
     repo.index.commit(f"Add kyu_{kyu_out} files")
