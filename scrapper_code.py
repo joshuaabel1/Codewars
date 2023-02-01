@@ -81,7 +81,7 @@ def build_functions(func_list):
         
     # Add all files in the repo_dir
     repo.git.add(A=True)
-    repo.index.commit(f"Add kyu_{kyu} files")
+    repo.index.commit(f"Add kyu files")
     
     # Remove remote "origin" if it exists
     try:
