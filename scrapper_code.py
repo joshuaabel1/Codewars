@@ -88,7 +88,7 @@ def build_functions(func_list):
     repo.remote("origin").remove(repo, "origin")
     origin = repo.create_remote(name='origin', url='https://github.com/joshuaabel1/Codewars.git')
     progress = RemoteProgress()
-    origin.push("origin", "main", progress=True)
+    origin.push("origin", "main", progress)
     return functions
 
 
