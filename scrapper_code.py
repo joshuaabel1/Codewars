@@ -88,9 +88,9 @@ def build_functions(func_list):
     repo.remote("origin").remove(repo, "origin")
     origin = repo.create_remote(name='origin', url='https://github.com/joshuaabel1/Codewars.git')
     try:
-        origin.push("origin", "main")
-    except git.exc.GitCommandError as error:
-        print("Error while pushing to remote repository:", error)
+        origin.push(refspec="main")
+    except git.exc.GitCommandError as e:
+        print(e)
     return functions
 
 
