@@ -95,7 +95,7 @@ def build_functions(func_list):
         kyu_out = func[0]
     # Remove remote "origin" if it exists
     repo.git.add(A=True)
-    repo.index.commit(f"Add kyu_{kyu} files")
+    repo.index.commit(f"Add kyu_{kyu_out} files")
     try:
         repo.remote("origin").remove(repo, "origin")
     except git.exc.GitCommandError as e:
