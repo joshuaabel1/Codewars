@@ -85,7 +85,7 @@ def build_functions(func_list):
             repo.index.commit(f"Add kyu_{kyu} files")
     repo.remote("origin").remove(repo, "origin")
     origin = repo.create_remote(name='origin', url='https://github.com/joshuaabel1/Codewars.git')
-    origin.push()
+    origin.push("main", set_upstream=True)
     return functions
 
 
