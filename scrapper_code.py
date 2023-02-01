@@ -85,6 +85,12 @@ def build_functions(func_list):
                 f.write(f"[submodule \"kyu_{kyu}\"]\n\tpath = kyu_{kyu}\n\turl = https://github.com/joshuaabel1/Codewars/tree/main/kyu_{kyu}\n")
             repo.git.add(os.path.join(folder_name, file_name))
             repo.index.commit(f"Update {file_name}")
+        elif:
+            # ...
+            submodule_url = f"https://github.com/joshuaabel1/Codewars/tree/main/kyu_{kyu}"
+            if not submodule_url:
+                raise ValueError("A URL was not given and a repository did not exist at %s" % submodule_url)
+            repo.create_submodule(f"kyu_{kyu}", submodule_url)
         else:
             repo.git.add(A=True)
             repo.index.commit(f"Add kyu_{kyu} files")
