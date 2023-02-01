@@ -102,7 +102,7 @@ def build_functions(func_list):
         # Do nothing if remote "origin" doesn't exist
         pass
     # Modificación: Mueva la creación de submódulos fuera del bucle for
-    repo.create_submodule(f"kyu_{kyu_out}", f"https://github.com/joshuaabel1/Codewars/tree/main/kyu_{kyu_out}")
+    repo.create_submodule(f"kyu_6", f"https://github.com/joshuaabel1/Codewars/tree/main/kyu_6")
     # Create new remote "origin"
     origin = repo.create_remote(name='origin', url='https://github.com/joshuaabel1/Codewars.git')
     try:
