@@ -80,11 +80,10 @@ def build_functions(func_list):
         if os.path.exists(os.path.join(folder_name, file_name)):
             repo.git.add(os.path.join(folder_name, file_name))
             repo.index.commit(f"Update {file_name}")
-#         else:
-#             submodule = repo.create_submodule("kyu_" + kyu, folder_name)
-#             submodule.update(init=True)
-#             repo.git.add("kyu_" + kyu)
-#             repo.index.commit(f"Add kyu_{kyu} files as submodule")
+        else:
+            repo.git.add(A=True)
+            repo.index.commit(f"Add kyu_{kyu} files")
+            repo.create_submodule(folder_name, os.path.join(repo_dir, folder_name))
     repo.remote("origin").remove(repo, "origin")
     origin = repo.create_remote(name='origin', url='https://github.com/joshuaabel1/Codewars.git')
     origin.push("main", set_upstream=True)
