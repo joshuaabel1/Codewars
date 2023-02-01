@@ -80,21 +80,19 @@ def build_functions(func_list):
         functions[func_name] = file_name
         if os.path.exists(os.path.join(folder_name, file_name)):
             with open(".gitmodules", "a") as f:
-              f.write(f"[submodule \"kyu_{kyu}\"]\n\tpath = kyu_6\n\turl = https://github.com/joshuaabel1/Codewars/tree/main/kyu_{kyu}\n")
+              f.write(f"[submodule \"kyu_{kyu}\"]\n\tpath = kyu_{kyu}\n\turl = https://github.com/joshuaabel1/Codewars/tree/main/kyu_{kyu}\n")
             repo.git.add(os.path.join(folder_name, file_name))
             repo.index.commit(f"Update {file_name}")
         else:
             repo.git.add(A=True)
             repo.index.commit(f"Add kyu_{kyu} files")
-        repo.create_submodule(f"kyu_{kyu}", f"https://github.com/joshuaabel1/Codewars/tree/main/kyu_{kyu}")
-
     # Remove remote "origin" if it exists
     try:
         repo.remote("origin").remove(repo, "origin")
     except git.exc.GitCommandError as e:
         # Do nothing if remote "origin" doesn't exist
         pass
-
+    repo.create_submodule(f"kyu_{kyu}", f"https://github.com/joshuaabel1/Codewars/tree/main/kyu_{kyu}")
     # Create new remote "origin"
     origin = repo.create_remote(name='origin', url='https://github.com/joshuaabel1/Codewars.git')
     try:
