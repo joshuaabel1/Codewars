@@ -87,7 +87,10 @@ def build_functions(func_list):
             repo.index.commit(f"Add kyu_{kyu} files")
     repo.remote("origin").remove(repo, "origin")
     origin = repo.create_remote(name='origin', url='https://github.com/joshuaabel1/Codewars.git')
-    origin.push("origin", "main", progress=git.RemoteProgress())
+    try:
+        origin.push("origin", "main")
+    except git.exc.GitCommandError as error:
+        print("Error while pushing to remote repository:", error)
     return functions
 
 
