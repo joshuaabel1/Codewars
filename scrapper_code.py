@@ -79,12 +79,12 @@ def build_functions(func_list):
             f.write(func_code.replace("last month", ""))
         functions[func_name] = file_name
         if os.path.exists(os.path.join(folder_name, file_name)):
+            repo.create_submodule(f"kyu_{kyu}", f"https://github.com/joshuaabel1/Codewars/tree/main/kyu_{kyu}")
             repo.git.add(os.path.join(folder_name, file_name))
             repo.index.commit(f"Update {file_name}")
         else:
             repo.git.add(A=True)
             repo.index.commit(f"Add kyu_{kyu} files")
-        repo.create_submodule(f"kyu_{kyu}", f"https://github.com/joshuaabel1/Codewars/tree/main/kyu_{kyu}")
     # Remove remote "origin" if it exists
     try:
         repo.remote("origin").remove(repo, "origin")
