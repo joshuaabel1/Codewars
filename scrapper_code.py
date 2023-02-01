@@ -83,10 +83,9 @@ def build_functions(func_list):
         else:
             repo.git.add(A=True)
             repo.index.commit(f"Add kyu_{kyu} files")
-            repo.create_submodule(folder_name, os.path.join(repo_dir, folder_name))
     repo.remote("origin").remove(repo, "origin")
     origin = repo.create_remote(name='origin', url='https://github.com/joshuaabel1/Codewars.git')
-    origin.push("main", set_upstream=True)
+    origin.push("--set-upstream", "origin", "main")
     return functions
 
 
