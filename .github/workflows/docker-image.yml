@@ -1,18 +1,32 @@
-name: Docker Image CI
+name: Codewars Automation
 
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    branches:
+      - main
+
+env:
+  USER_EMAIL: ${{ secrets.USER_EMAIL }}
+  PASS: ${{ secrets.PASS }}
+  URL: ${{ secrets.URL }}
 
 jobs:
-
-  build:
-
+  codewars:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+
+    - name: Run scrapper_code
+      run: |
+        python scrapper_code.py
