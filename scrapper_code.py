@@ -8,8 +8,25 @@ import time
 from selenium.webdriver import Firefox, Chrome
 from selenium.webdriver.chrome.options import Options
 import git
+import subprocess
+import sys
 
 load_dotenv()
+# Check if ChromeDriver has execute permission
+if not os.access('/usr/bin/google-chrome', os.X_OK):
+    os.chmod('/usr/bin/google-chrome', 0o755)
+
+# Check if required dependencies are installed
+try:
+    subprocess.check_call(['google-chrome', '--version'])
+except subprocess.CalledProcessError:
+    sys.exit('Google Chrome is not installed')
+
+try:
+    subprocess.check_call(['chromedriver', '--version'])
+except subprocess.CalledProcessError:
+    sys.exit('ChromeDriver is not installed')
+
 chrome_options = Options()
 chrome_options.add_argument("--headless")
 
