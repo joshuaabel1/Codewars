@@ -1,0 +1,45 @@
+name: Codewars Automation
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  USER_EMAIL: ${{ secrets.USER_EMAIL }}
+  PASS: ${{ secrets.PASS }}
+  URL: ${{ secrets.URL }}
+
+jobs:
+  codewars:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+    - name: Install Google Chrome
+      run: |
+        wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+        sudo apt install ./google-chrome-stable_current_amd64.deb
+    - name: Install ChromeDriver 1
+      run: |
+        wget https://chromedriver.storage.googleapis.com/88.0.4324.96/chromedriver_linux64.zip
+        unzip chromedriver_linux64.zip
+        sudo mv chromedriver /usr/bin/
+    - name: Install ChromeDriver 2
+      run: |
+        wget https://chromedriver.storage.googleapis.com/87.0.4280.88/chromedriver_linux64.zip
+        unzip chromedriver_linux64.zip
+        sudo mv chromedriver /usr/bin/
+    - name: Run scrapper_code
+      run: |
+        python scrapper_code.py
