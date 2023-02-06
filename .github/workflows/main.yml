@@ -26,15 +26,18 @@ jobs:
     - name: Install dependencies
       run: |
         pip install -r requirements.txt
+
     - name: Install Google Chrome
       run: |
         wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
         sudo apt install ./google-chrome-stable_current_amd64.deb
+
+    - name: Install ChromeDriver
+      run: |
+        wget https://chromedriver.storage.googleapis.com/110.0.5481.30/chromedriver_linux64.zip
+        unzip chromedriver_linux64.zip
+        sudo mv chromedriver /usr/bin/
+
     - name: Run scrapper_code
       run: |
         python scrapper_code.py
-Footer
-© 2023 GitHub, Inc.
-Footer navigation
-Terms
-Priva
