@@ -6,10 +6,14 @@ from git import Repo
 from dotenv import load_dotenv
 import time
 from selenium.webdriver import Firefox, Chrome
+from selenium.webdriver.chrome.options import Options
+import git
 
 load_dotenv()
+chrome_options = Options()
+chrome_options.add_argument("--headless")
 
-driver = webdriver.c()
+driver = Chrome()
 
 driver.get("https://www.codewars.com/users/sign_in")
 
@@ -29,7 +33,7 @@ login_button = driver.find_element(By.XPATH,
 login_button.click()
 
 driver.implicitly_wait(10)
-driver.get(os.getenv("URL"))
+driver.get("https://www.codewars.com/users/joshua_abel27/completed_solutions")
 last_height = driver.execute_script(
     "return Math.max( document.body.scrollHeight, document.body.offsetHeight, document.documentElement.clientHeight, document.documentElement.scrollHeight, document.documentElement.offsetHeight );")
 
@@ -42,9 +46,9 @@ while True:
         break
     last_height = new_height
 
-level = driver.find_element(
-    By.XPATH, "//div[@class='small-hex is-extra-wide is-inline mr-15px is-white-rank']")
-folder_kata = level.text
+# level = driver.find_element(
+#     By.XPATH, "//div[@class='small-hex is-extra-wide is-inline mr-15px is-white-rank']")
+# folder_kata = level.text
 
 code_element = driver.find_element(
     By.XPATH, "//div[@class='items-list w-full md:w-2/3 md:pl-4 md:border-l md:grow']")
@@ -59,10 +63,11 @@ def build_functions(func_list):
     functions = {}
     repo_dir = '.'
     repo = Repo.init(repo_dir)
+    kyu_out = ""
     for func in func_list:
         kyu = func[0]
-        func_code = func[1].replace(
-            "\nlast month\nRefactor\nDiscuss", "").split("Refactor")[0]
+        kyu_out = func[0]
+        func_code = func[1].replace("\nlast month\nRefactor\nDiscuss", "").split("Refactor")[0]
         func_name = re.search(r'def (\w+)', func_code).group(1)
         folder_name = "kyu_" + kyu
         if not os.path.exists(folder_name):
@@ -72,6 +77,9 @@ def build_functions(func_list):
             f.write(func_code.replace("last month", ""))
         functions[func_name] = file_name
         if os.path.exists(os.path.join(folder_name, file_name)):
+            with open(".gitmodules", "a") as f:
+                # Modificación: Cambie "kyu_6" a "kyu_{kyu}"
+                f.write(f"[submodule \"kyu_{kyu}\"]\n\tpath = kyu_{kyu}\n\turl = https://github.com/joshuaabel1/Codewars/tree/main/kyu_{kyu}\n")
             repo.git.add(os.path.join(folder_name, file_name))
             repo.index.commit(f"Update {file_name}")
         else:
@@ -80,6 +88,8 @@ def build_functions(func_list):
     origin = repo.remote(name='origin', url='https://github.com/joshuaabel1/Codewars.git')
     origin.push()
     return functions
+
+
 
 
 build_functions(functions)
