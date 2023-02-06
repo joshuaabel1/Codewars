@@ -77,9 +77,9 @@ def build_functions(func_list):
             f.write(func_code.replace("last month", ""))
         functions[func_name] = file_name
         if os.path.exists(os.path.join(folder_name, file_name)):
-            with open(".gitmodules", "a") as f:
+            # with open(".gitmodules", "a") as f:
                 # Modificación: Cambie "kyu_6" a "kyu_{kyu}"
-                f.write(f"[submodule \"kyu_{kyu}\"]\n\tpath = kyu_{kyu}\n\turl = https://github.com/joshuaabel1/Codewars/tree/main/kyu_{kyu}\n")
+                # f.write(f"[submodule \"kyu_{kyu}\"]\n\tpath = kyu_{kyu}\n\turl = https://github.com/joshuaabel1/Codewars/tree/main/kyu_{kyu}\n")
             repo.git.add(os.path.join(folder_name, file_name))
             repo.index.commit(f"Update {file_name}")
         else:
